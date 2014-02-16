@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_tdd-assignment-2" default="compile.module.tdd-assignment-2">
+  <dirname property="module.tdd-assignment-2.basedir" file="${ant.file.module_tdd-assignment-2}"/>
+  
+  <property name="module.jdk.home.tdd-assignment-2" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.tdd-assignment-2" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.tdd-assignment-2" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.tdd-assignment-2" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="tdd-assignment-2.output.dir" value="${module.tdd-assignment-2.basedir}/out/production/tdd-assignment-2"/>
+  <property name="tdd-assignment-2.testoutput.dir" value="${module.tdd-assignment-2.basedir}/out/test/tdd-assignment-2"/>
+  
+  <path id="tdd-assignment-2.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="tdd-assignment-2.module.production.classpath">
+    <path refid="${module.jdk.classpath.tdd-assignment-2}"/>
+    <path refid="library.junit-4.11-snapshot-20120416-1530.classpath"/>
+  </path>
+  
+  <path id="tdd-assignment-2.runtime.production.module.classpath">
+    <pathelement location="${tdd-assignment-2.output.dir}"/>
+    <path refid="library.junit-4.11-snapshot-20120416-1530.classpath"/>
+  </path>
+  
+  <path id="tdd-assignment-2.module.classpath">
+    <path refid="${module.jdk.classpath.tdd-assignment-2}"/>
+    <pathelement location="${tdd-assignment-2.output.dir}"/>
+    <path refid="library.junit-4.11-snapshot-20120416-1530.classpath"/>
+  </path>
+  
+  <path id="tdd-assignment-2.runtime.module.classpath">
+    <pathelement location="${tdd-assignment-2.testoutput.dir}"/>
+    <pathelement location="${tdd-assignment-2.output.dir}"/>
+    <path refid="library.junit-4.11-snapshot-20120416-1530.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.tdd-assignment-2">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.tdd-assignment-2">
+    <patternset refid="excluded.from.module.tdd-assignment-2"/>
+  </patternset>
+  
+  <path id="tdd-assignment-2.module.sourcepath">
+    <dirset dir="${module.tdd-assignment-2.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.tdd-assignment-2" depends="compile.module.tdd-assignment-2.production,compile.module.tdd-assignment-2.tests" description="Compile module tdd-assignment-2"/>
+  
+  <target name="compile.module.tdd-assignment-2.production" depends="register.custom.compilers" description="Compile module tdd-assignment-2; production classes">
+    <mkdir dir="${tdd-assignment-2.output.dir}"/>
+    <javac2 destdir="${tdd-assignment-2.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.tdd-assignment-2}/javac">
+      <compilerarg line="${compiler.args.tdd-assignment-2}"/>
+      <bootclasspath refid="tdd-assignment-2.module.bootclasspath"/>
+      <classpath refid="tdd-assignment-2.module.production.classpath"/>
+      <src refid="tdd-assignment-2.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.tdd-assignment-2"/>
+    </javac2>
+    
+    <copy todir="${tdd-assignment-2.output.dir}">
+      <fileset dir="${module.tdd-assignment-2.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.tdd-assignment-2.tests" depends="register.custom.compilers,compile.module.tdd-assignment-2.production" description="compile module tdd-assignment-2; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.tdd-assignment-2" description="cleanup module">
+    <delete dir="${tdd-assignment-2.output.dir}"/>
+    <delete dir="${tdd-assignment-2.testoutput.dir}"/>
+  </target>
+</project>
