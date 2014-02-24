@@ -2,6 +2,8 @@ package main.java;
 
 import java.util.Calendar;
 
+// good documentation in this file. 
+
 /**
  * A Duplicate File Finder Class that checks for duplicate files within the source directory.
  *
@@ -17,6 +19,8 @@ public class DuplicateFileFinder {
      * This does not seem to be working, so I've swapped out the
      * Calendar object for a String.
      *
+     --> DO NOT put code that is just used by tests into production code
+     --> Production code should not be changed for tests. 
      * Calendar helloDateCreated = Calendar.getInstance();
      * helloDateCreated.set(2014, 2, 8);
      */
